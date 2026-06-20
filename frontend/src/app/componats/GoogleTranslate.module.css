@@ -1,0 +1,142 @@
+/* components/GoogleTranslate/GoogleTranslate.module.css */
+.translateContainer {
+  position: relative;
+  z-index: 1000;
+}
+
+.customDropdown {
+  position: relative;
+  min-width: 160px;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdownHeader:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.currentFlag {
+  font-size: 16px;
+}
+
+.currentLanguage {
+  flex: 1;
+  text-align: left;
+}
+
+.chevron {
+  transition: transform 0.2s ease;
+}
+
+.customDropdown:hover .chevron {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 1001;
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.customDropdown:hover .dropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.languageOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+  font-size: 14px;
+  text-align: left;
+}
+
+.languageOption:hover {
+  background: #f5f5f5;
+}
+
+.languageOption.active {
+  background: #f0f7ff;
+  color: #0066cc;
+}
+
+.flag {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.name {
+  flex: 1;
+}
+
+.check {
+  color: #0066cc;
+}
+
+/* Override Google Translate styles */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+.goog-te-menu-frame {
+  max-width: 100% !important;
+}
+
+.goog-te-menu-value span {
+  color: white !important;
+}
+
+.goog-te-menu-value {
+  color: white !important;
+}
+
+.goog-te-gadget {
+  font-family: inherit !important;
+}
+
+.goog-te-gadget-simple {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 4px 8px !important;
+}
+
+.goog-te-menu2 {
+  max-width: 300px !important;
+}

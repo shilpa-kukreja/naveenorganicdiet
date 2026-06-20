@@ -1,0 +1,195 @@
+# version: "3.9"
+
+# services:
+#   redis:
+#     image: redis:alpine
+#     container_name: redis_server
+#     ports:
+#       - "6379:6379"
+#     volumes:
+#       - redis_data:/data
+
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo_db
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo_data:/data/db
+
+#   api:
+#     build: .
+#     container_name: backend_api
+#     ports:
+#       - "5000:5000"
+#     depends_on:
+#       - mongo
+#       - redis
+#     environment:
+#       MONGO_URL: mongodb://mongo:27017/organicdiet
+#       REDIS_HOST: redis
+#       REDIS_PORT: 6379
+
+# volumes:
+#   redis_data:
+#   mongo_data:
+
+# docker-compose.yml
+# version: "3.9"
+
+# services:
+#   redis:
+#     image: redis:alpine
+#     container_name: redis_server
+#     ports:
+#       - "6379:6379"
+#     volumes:
+#       - redis_data:/data
+
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo_db
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo_data:/data/db
+
+#   api:
+#     build: .
+#     container_name: backend_api
+#     ports:
+#       - "5000:5000"
+#     depends_on:
+#       - mongo
+#       - redis
+#     environment:
+#       MONGO_URL: mongodb://mongo:27017/organicdiet
+#       REDIS_HOST: redis
+#       REDIS_PORT: 6379
+#     command: npm start # Starts your main API server
+
+#   # 👇 New email worker service
+#   email-worker:
+#     build: .
+#     container_name: email_worker
+#     depends_on:
+#       - redis
+#     environment:
+#       REDIS_HOST: redis
+#       REDIS_PORT: 6379
+#       # Add your email environment variables here too
+#       EMAIL_USER: ${EMAIL_USER}
+#       EMAIL_PASS: ${EMAIL_PASS}
+#       EMAIL_FROM: ${EMAIL_FROM}
+#     command: node workers/emailWorker.js # Starts the worker process
+
+# volumes:
+#   redis_data:
+#   mongo_data:
+
+
+version: "3.9"
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS:-password}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+  api:
+    build: .
+    container_name: backend_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      MONGO_URI: ${MONGO_URI}
+      REDIS_URL: redis://redis:6379 # Use the Redis connection string
+      # REDIS_HOST: redis
+      # REDIS_PORT: 6379
+      EMAIL_USER: ${EMAIL_USER}
+      EMAIL_PASS: ${EMAIL_PASS}
+      EMAIL_FROM: ${EMAIL_FROM}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+      QUEUE_ADMIN_USER: ${QUEUE_ADMIN_USER:-admin}
+      QUEUE_ADMIN_PASS: ${QUEUE_ADMIN_PASS:-admin123}
+      NODE_ENV: production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: npm start
+
+  email-worker:
+    build: .
+    container_name: email_worker
+    depends_on:
+      - redis
+    environment:
+      # REDIS_HOST: redis
+      # REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379 # Use the Redis connection string
+      EMAIL_USER: ${EMAIL_USER}
+      EMAIL_PASS: ${EMAIL_PASS}
+      EMAIL_FROM: ${EMAIL_FROM}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+      NODE_ENV: production
+    restart: unless-stopped
+    command: node workers/emailWorker.js
+    # Uncomment to scale workers
+    # deploy:
+    #   replicas: 2
+
+  order-worker:
+    build: .
+    container_name: order_worker
+    depends_on:
+      - redis
+      - mongo
+    environment:
+      # REDIS_HOST: redis
+      # REDIS_PORT: 6379
+      REDIS_URL: redis://redis:6379 # Use the Redis connection string
+      MONGO_URI: ${MONGO_URI}
+      NODE_ENV: production
+    restart: unless-stopped
+    command: node workers/orderWorker.js
+
+volumes:
+  redis_data:
+  mongo_data:
+
+networks:
+  default:
+    name: app_network
