@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useAuth } from '../lib/auth-context';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 
-export default function AdminLoginPage() {
+const AdminLoginPageContent=()=> {
   console.log('AdminLoginPage');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -274,3 +274,25 @@ export default function AdminLoginPage() {
     </div>
   );
 }
+
+
+
+const AdminLoginPage = () => (
+  <Suspense
+    fallback={
+      <AdminLayout>
+        <div className="max-w-7xl mx-auto p-6 flex items-center justify-center min-h-[40vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500 mx-auto" />
+            <p className="mt-3 text-gray-600">Loading...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    }
+  >
+    <AdminLoginPageContent />
+  </Suspense>
+);
+
+export default AdminLoginPage;
+

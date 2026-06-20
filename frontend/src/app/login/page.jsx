@@ -489,7 +489,7 @@
 
 
 'use client';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef,Suspense } from 'react';
 import Link from 'next/link';
 import { IoMdPhonePortrait, IoMdLock,IoMdGift } from 'react-icons/io';
 import { RiShieldCheckLine, RiTimeLine } from 'react-icons/ri';
@@ -498,7 +498,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Header from '../componats/Header';
 import Footer from '../componats/Footer';
 
-const Login = () => {
+const LoginContent = () => {
   const [step, setStep] = useState(1);
   const [loginMethod, setLoginMethod] = useState('sms');
   const [formData, setFormData] = useState({
@@ -1127,5 +1127,22 @@ const Login = () => {
     </div>
   );
 };
+
+const Login = () => (
+  <Suspense
+    fallback={
+      <AdminLayout>
+        <div className="max-w-7xl mx-auto p-6 flex items-center justify-center min-h-[40vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500 mx-auto" />
+            <p className="mt-3 text-gray-600">Loading...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    }
+  >
+    <LoginContent />
+  </Suspense>
+);
 
 export default Login;

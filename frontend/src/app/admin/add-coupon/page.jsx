@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-export default function AddCoupon() {
+const AddCouponContent=()=> {
   const [formData, setFormData] = useState({
     couponCode: "",
     discount: "",
@@ -384,3 +384,24 @@ export default function AddCoupon() {
     </div>
   );
 };
+
+
+
+const AddCoupon = () => (
+  <Suspense
+    fallback={
+      
+        <div className="max-w-7xl mx-auto p-6 flex items-center justify-center min-h-[40vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500 mx-auto" />
+            <p className="mt-3 text-gray-600">Loading...</p>
+          </div>
+        </div>
+  
+    }
+  >
+    <AddCouponContent />
+  </Suspense>
+);
+
+export default AddCoupon;
