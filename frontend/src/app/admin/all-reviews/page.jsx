@@ -33,7 +33,7 @@ const fetchReviews = async () => {
       ...filters
     });
 
-    const response = await fetch(`http://localhost:5000/api/reviews/admin?${params}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/admin?${params}`);
     const result = await response.json();
 
     if (result.success) {
@@ -81,7 +81,7 @@ const formatDate = (dateValue) => {
 
   const handleStatusUpdate = async (reviewId, status) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/reviews/${reviewId}/status`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/reviews/${reviewId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -473,7 +473,7 @@ const formatDate = (dateValue) => {
                 <>
                   <div className="flex items-center space-x-4">
                     <img
-                      src={`http://localhost:5000/${selectedReview.product?.thumbImg}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}/${selectedReview.product?.thumbImg}`}
                       alt={selectedReview.product?.name}
                       className="w-16 h-16 rounded-lg object-cover"
                       // onError={(e) => {

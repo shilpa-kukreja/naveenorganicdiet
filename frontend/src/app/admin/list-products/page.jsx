@@ -25,7 +25,7 @@ export default function ListProducts() {
     const fetchProducts = async () => {
         try {
             setIsLoading(true);
-            const res = await axios.get("http://localhost:5000/api/product/products");
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/products`);
             if (res.data?.products) {
                 setProducts(res.data.products);
             }
@@ -40,7 +40,7 @@ export default function ListProducts() {
     // ✅ Fetch categories
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/category/get");
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/category/get`);
             if (res.data) {
                 setCategories(res.data || []);
             }
@@ -86,9 +86,9 @@ export default function ListProducts() {
                 "Short Description": product.shortDescription || "N/A",
                 Description: product.description || "N/A",
                 "Additional Information": product.additionalInformation || "N/A",
-                "Thumbnail Image": product.thumbImg ? `http://localhost:5000${product.thumbImg}` : "N/A",
+                "Thumbnail Image": product.thumbImg ? `${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}` : "N/A",
                 "Gallery Images": product.galleryImg && product.galleryImg.length > 0 
-                    ? product.galleryImg.map(img => `http://localhost:5000${img}`).join(", ") 
+                    ? product.galleryImg.map(img => `${process.env.NEXT_PUBLIC_API_URL}${img}`).join(", ") 
                     : "N/A",
                 Price: getProductPrice(product).replace('₹', ''),
                 Stock: getProductStock(product),
@@ -123,7 +123,7 @@ export default function ListProducts() {
         if (!confirm(`Are you sure you want to delete "${name}"?`)) return;
 
         try {
-            await axios.delete("http://localhost:5000/api/product/" + id);
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/product/` + id);
             toast.success("Product deleted successfully");
             fetchProducts();
         } catch (err) {
@@ -338,7 +338,7 @@ export default function ListProducts() {
                                                                     <img
                                                                         src={
                                                                             product.thumbImg
-                                                                                ? `http://localhost:5000${product.thumbImg}`
+                                                                                ? `${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`
                                                                                 : "/placeholder.jpg"
                                                                         }
                                                                         alt={product.name}

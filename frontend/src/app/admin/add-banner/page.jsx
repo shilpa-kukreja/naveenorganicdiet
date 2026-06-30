@@ -18,7 +18,7 @@ import {
   X
 } from 'lucide-react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/about-banner';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/about-banner`;
 
 // Page type options
 const pageTypes = [
@@ -219,7 +219,7 @@ function BannerAdmin() {
       status: banner.status,
       order: banner.order
     });
-    setImagePreview(`http://localhost:5000${banner.image}`);
+    setImagePreview(`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`);
     setOpenModal(true);
   };
 
@@ -388,7 +388,7 @@ function BannerAdmin() {
                         <div className="h-20 w-32">
                           <img
                             className="h-20 w-32 rounded-lg object-cover border border-gray-200"
-                            src={`http://localhost:5000${banner.image}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`}
                             alt={banner.title}
                           />
                         </div>
@@ -802,7 +802,7 @@ function BannerAdmin() {
                 <div className="bg-gray-50 p-4 rounded-lg mb-6">
                   <div className="flex items-center space-x-4">
                     <img
-                      src={`http://localhost:5000${selectedBanner.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${selectedBanner.image}`}
                       alt={selectedBanner.title}
                       className="w-24 h-16 object-cover rounded"
                     />

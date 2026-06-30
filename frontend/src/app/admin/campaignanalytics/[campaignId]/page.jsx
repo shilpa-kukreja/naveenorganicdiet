@@ -37,7 +37,7 @@ const CampaignAnalytics = ( ) => {
       
       const hours = timeRange === '24h' ? 24 : 168;
       const { data } = await axios.get(
-        `http://localhost:5000/api/tracking/analytics/${campaignId}?hours=${hours}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tracking/analytics/${campaignId}?hours=${hours}`,
         {
           timeout: 15000,
           headers: {

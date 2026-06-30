@@ -160,7 +160,7 @@ export default function BlogDetailPage() {
                             {/* Enhanced Featured Image */}
                             <div className="relative h-80 lg:h-96 rounded-3xl overflow-hidden mb-12 shadow-2xl border border-gray-200 group">
                                 <img
-                                    src={`http://localhost:5000${blogData.blogImg}`}
+                                    src={`${process.env.NEXT_PUBLIC_API_URL}${blogData.blogImg}`}
                                     alt={blogData.blogName}
                                     className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-700 ease-out"
                                     priority
@@ -333,7 +333,7 @@ export default function BlogDetailPage() {
                                                 >
                                                     <div className="relative w-20 h-20 flex-shrink-0">
                                                         <img
-                                                            src={`http://localhost:5000${latestBlog.blogImg}`}
+                                                            src={`${process.env.NEXT_PUBLIC_API_URL}${latestBlog.blogImg}`}
                                                             alt={latestBlog.blogName}
                                                             className="object-cover rounded-xl border border-[#00a63d] shadow-sm group-hover:shadow-md transition-all duration-300 group-hover:scale-105"
                                                         />

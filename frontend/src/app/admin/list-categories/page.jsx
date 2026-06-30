@@ -21,7 +21,7 @@ const ListCategory = () => {
  const fetchCategories = async () => {
   try {
     setIsLoading(true);
-    const res = await axios.get("http://localhost:5000/api/category/get");
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/category/get`);
     
     // CORRECTED: Use res.data directly since backend returns array
     // console.log("API Response:", res.data); // This should show your categories array
@@ -41,7 +41,7 @@ const ListCategory = () => {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this category? This action cannot be undone.")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/category/${id}`);
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/category/${id}`);
       toast.success("Category deleted successfully");
       fetchCategories();
     } catch (error) {
@@ -69,7 +69,7 @@ const ListCategory = () => {
       const dataToExport = filteredCategories.map(cat => ({
         Name: cat.name,
         Slug: cat.slug,
-        Image: cat.image ? `http://localhost:5000${cat.image}` : 'Not available',
+        Image: cat.image ? `${process.env.NEXT_PUBLIC_API_URL}${cat.image}` : 'Not available',
         Created: cat.createdAt ? new Date(cat.createdAt).toLocaleDateString() : 'Unknown'
       }));
 
@@ -278,7 +278,7 @@ const ListCategory = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <img
-                          src={cat.image ? `http://localhost:5000${cat.image}` : '/placeholder.jpg'}
+                          src={cat.image ? `${process.env.NEXT_PUBLIC_API_URL}${cat.image}` : '/placeholder.jpg'}
                           alt={cat.name}
                           className="h-full w-full object-cover object-center"
                         //   onError={(e) => {

@@ -40,7 +40,7 @@ export default function ListTeamMembers() {
   const fetchTeamMembers = async () => {
     try {
       const token = localStorage.getItem('admin-token');
-      const response = await axios.get('http://localhost:5000/api/admin', {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/admin`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -68,7 +68,7 @@ export default function ListTeamMembers() {
 
     try {
       const token = localStorage.getItem('admin-token');
-      await axios.delete(`http://localhost:5000/api/admin/${memberId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/${memberId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

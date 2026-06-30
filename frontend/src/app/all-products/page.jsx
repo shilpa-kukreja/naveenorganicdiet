@@ -807,7 +807,7 @@ const ProductCard = ({ product, viewMode, isMobile }) => {
               {!imageError ? (
                 <Link href={`/product/${product.slug}`}>
                   <img
-                    src={`http://localhost:5000${product.thumbImg}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                     className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'} group-hover:scale-105 transition-transform duration-500`}
                     alt={product.name}
                     onLoad={handleImageLoad}
@@ -911,7 +911,7 @@ const ProductCard = ({ product, viewMode, isMobile }) => {
           <div className={`w-full aspect-square bg-gray-100 ${!imageLoaded ? 'animate-pulse' : ''}`}>
             {!imageError ? (
               <img
-                src={`http://localhost:5000${product.thumbImg}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                 className={`w-full h-full object-cover transition-all duration-500 ${
                   imageLoaded ? 'opacity-100' : 'opacity-0'
                 } group-hover:scale-105`}

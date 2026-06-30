@@ -371,7 +371,7 @@ export default function AddTeamMember() {
     try {
       const token = localStorage.getItem('admin-token');
       const response = await axios.post(
-        'http://localhost:5000/api/admin',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin`,
         formData,
         {
           headers: {

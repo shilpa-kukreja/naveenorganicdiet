@@ -597,7 +597,7 @@ const UserOrders = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:5000/api/order/user", { userId });
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/order/user`, { userId });
       console.log("Orders fetched:", data.orders); // Debug log
       setOrders(data.orders);
     } catch (error) {
@@ -609,7 +609,7 @@ const UserOrders = () => {
   const changeStatus = async (orderid, status) => {
     setUpdatingOrder(orderid);
     try {
-      const { data } = await axios.put("http://localhost:5000/api/order/status", { orderid, status });
+      const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/order/status`, { orderid, status });
       toast.success(data.message);
       fetchOrders();
     } catch (error) {

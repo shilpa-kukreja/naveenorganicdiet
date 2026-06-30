@@ -65,7 +65,7 @@ const AddProductContent=()=> {
 
     const fetchCategories = async () => {
         try {
-            const res = await axios.get("http://localhost:5000/api/category/get");
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/category/get`);
             setCategories(res.data || []);
         } catch (error) {
             console.error("Error fetching categories:", error);
@@ -78,7 +78,7 @@ const AddProductContent=()=> {
     const fetchProductDetails = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:5000/api/product/product/${id}`);
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/product/${id}`);
             if (response.data) {
                 const product = response.data;
 
@@ -108,12 +108,12 @@ const AddProductContent=()=> {
                 });
 
                 if (product.thumbImg) {
-                    setThumbImgPreview(`http://localhost:5000${product.thumbImg}`);
+                    setThumbImgPreview(`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`);
                 }
 
                 if (product.galleryImg?.length > 0) {
                     const galleryUrls = product.galleryImg.map(img =>
-                        typeof img === 'string' ? `http://localhost:5000${img}` : img
+                        typeof img === 'string' ? `${process.env.NEXT_PUBLIC_API_URL}${img}` : img
                     );
                     setGalleryPreviews(galleryUrls);
                 }
@@ -269,13 +269,13 @@ const AddProductContent=()=> {
             let response;
             if (isEditMode) {
                 response = await axios.put(
-                    `http://localhost:5000/api/product/product/${id}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/product/product/${id}`,
                     payload,
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );
             } else {
                 response = await axios.post(
-                    "http://localhost:5000/api/product/product",
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/product/product`,
                     payload,
                     { headers: { "Content-Type": "multipart/form-data" } }
                 );

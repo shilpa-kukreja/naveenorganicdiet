@@ -38,7 +38,7 @@ const AddCategoryPageContent=()=> {
     const loadCategory = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`http://localhost:5000/api/category/${categoryId}`);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/category/${categoryId}`);
         console.log("API Response:", res);
 
         setFormData({
@@ -48,7 +48,7 @@ const AddCategoryPageContent=()=> {
         });
 
         if (res.data.image) {
-          setPreview(`http://localhost:5000${res.data.image}`);
+          setPreview(`${process.env.NEXT_PUBLIC_API_URL}${res.data.image}`);
         }
       } catch (err) {
         toast.error("Failed to load category data");
@@ -115,12 +115,12 @@ const AddCategoryPageContent=()=> {
       setIsSubmitting(true);
 
       if (categoryId) {
-        await axios.put(`http://localhost:5000/api/category/${categoryId}`, data, {
+        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/category/${categoryId}`, data, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         toast.success("Category updated successfully! 🎉");
       } else {
-        await axios.post("http://localhost:5000/api/category", data, {
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/category`, data, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         toast.success("Category added successfully! 🎉");

@@ -1854,7 +1854,7 @@ export default function ProductDetailPage() {
     if (!product) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/product/${product._id}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/product/${product._id}`);
       const data = await response.json();
 
       if (data.success) {
@@ -1943,7 +1943,7 @@ export default function ProductDetailPage() {
   // Mark review as helpful
   const markHelpful = useCallback(async (reviewId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${reviewId}/helpful`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${reviewId}/helpful`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -2074,7 +2074,7 @@ export default function ProductDetailPage() {
 
                     {/* Main Product Image */}
                     <img
-                      src={`http://localhost:5000${productImages[selectedImage]}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${productImages[selectedImage]}`}
                       alt={product.name}
                       className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoading ? 'opacity-0' : 'opacity-100'
                         } ${zoomImage ? 'scale-150' : 'scale-100'}`}
@@ -2162,7 +2162,7 @@ export default function ProductDetailPage() {
                           }`}
                       >
                         <img
-                          src={`http://localhost:5000${image}`}
+                          src={`${process.env.NEXT_PUBLIC_API_URL}${image}`}
                           alt={`${product.name} ${index + 1}`}
                           className="w-full h-full object-cover"
                         />
@@ -2812,7 +2812,7 @@ const ReviewModal = React.memo(({ product, user, onClose, onSubmit }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/reviews/create', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/reviews/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -2876,7 +2876,7 @@ const ReviewModal = React.memo(({ product, user, onClose, onSubmit }) => {
           {/* Product Info */}
           <div className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
             <img
-              src={`http://localhost:5000${product.thumbImg}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
               alt={product.name}
               className="w-16 h-16 object-cover rounded-lg"
             />
@@ -3055,7 +3055,7 @@ const RelatedProductCard = React.memo(({ product }) => {
         <div className={`w-full aspect-square bg-gray-100 ${!imageLoaded ? 'animate-pulse' : ''}`}>
           {!imageError ? (
             <img
-              src={`http://localhost:5000${product.thumbImg}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
               className={`w-full h-full object-cover transition-all duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'
                 } group-hover:scale-110`}
               alt={product.name}

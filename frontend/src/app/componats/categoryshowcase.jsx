@@ -345,7 +345,7 @@ const CategoryShowcase = () => {
                 <Link href={`/product/${product.slug}`}>
                   <div className="relative aspect-square bg-gray-50 overflow-hidden">
                     <img
-                      src={`http://localhost:5000${product.thumbImg}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                       alt={product.name}
                       className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0"
                     />

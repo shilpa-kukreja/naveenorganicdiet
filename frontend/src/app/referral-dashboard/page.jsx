@@ -64,13 +64,13 @@ export default function ReferralDashboard() {
     setLoading(true);
     try {
       const [dashboardRes, referralsRes, payoutsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/users/referral/dashboard', {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/referral/dashboard`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/users/referrals', {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/referrals`, {
           headers: { Authorization: `Bearer ${token}` }
         }),
-        axios.get('http://localhost:5000/api/users/history', {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/history`, {
           headers: { Authorization: `Bearer ${token}` }
         })
       ]);
@@ -144,7 +144,7 @@ export default function ReferralDashboard() {
   useEffect(() => {
     const fetchWalletCoins = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/users/wallet', {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/wallet`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.data.success) {
@@ -161,7 +161,7 @@ export default function ReferralDashboard() {
   useEffect(() => {
     const fetchTotalEarnings = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/total-earnings", {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/total-earnings`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTotalEarnings(res.data.totalEarnings || 0);
@@ -219,7 +219,7 @@ export default function ReferralDashboard() {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/users/request',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/request`,
         {
           method: payoutMethod,
           amount: amount,

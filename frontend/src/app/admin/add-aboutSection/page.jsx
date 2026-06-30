@@ -16,7 +16,7 @@ if (typeof window !== 'undefined') {
     ClassicEditor = require('@ckeditor/ckeditor5-build-classic');
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/about';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/about`;
 
 const AboutSectionAdmin = () => {
   const [sections, setSections] = useState([]);
@@ -275,7 +275,7 @@ const AboutSectionAdmin = () => {
       isActive: section.isActive,
       order: section.order
     });
-    setImagePreview(`http://localhost:5000${section.image}`);
+    setImagePreview(`${process.env.NEXT_PUBLIC_API_URL}${section.image}`);
     setPoints(section.points && section.points.length > 0 ? section.points : [{ text: '', order: 0 }]);
     setOpenModal(true);
   };
@@ -394,7 +394,7 @@ const AboutSectionAdmin = () => {
                           <div className="h-16 w-24 flex-shrink-0">
                             <img
                               className="h-16 w-24 rounded-lg object-cover border border-gray-200"
-                              src={`http://localhost:5000${section.image}`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL}${section.image}`}
                               alt={section.title}
                             />
                           </div>
@@ -813,7 +813,7 @@ const AboutSectionAdmin = () => {
                 <div className="bg-gray-50 p-4 rounded-lg mb-6">
                   <div className="flex items-center space-x-4">
                     <img
-                      src={`http://localhost:5000${selectedSection.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${selectedSection.image}`}
                       alt={selectedSection.title}
                       className="w-16 h-16 object-cover rounded"
                     />

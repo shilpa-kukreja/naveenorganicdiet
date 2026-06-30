@@ -19,8 +19,8 @@ export default function AdminAllReferrals() {
     try {
       setLoading(true);
       const [referralsRes, statsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/users/all-referrals'),
-        axios.get('http://localhost:5000/api/users/referral-stats')
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/all-referrals`),
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/referral-stats`)
       ]);
 
       if (referralsRes.data.success) {

@@ -122,12 +122,12 @@ const AddCouponContent=()=> {
       let response;
       if (editingCoupon) {
         response = await axios.put(
-          `http://localhost:5000/api/coupons/${editingCoupon._id}`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/coupons/${editingCoupon._id}`,
           payload
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/coupon/add",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/coupon/add`,
           payload
         );
       }

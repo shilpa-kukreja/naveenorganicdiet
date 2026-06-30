@@ -86,7 +86,7 @@ const AdminDashboard = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        "http://localhost:5000/api/admin/dashboard/stats",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/dashboard/stats`,
         { params: { period } }
       );
       setStats(response.data.data);
@@ -112,7 +112,7 @@ const AdminDashboard = () => {
   const handleExportData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/admin/dashboard/export",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/admin/dashboard/export`,
         { 
           params: { 
             period,
@@ -681,7 +681,7 @@ const AdminDashboard = () => {
                     >
                       <Stack direction="row" alignItems="center" spacing={2}>
                         <Avatar
-                          src={product.productImage ? `http://localhost:5000${product.productImage}` : ''}
+                          src={product.productImage ? `${process.env.NEXT_PUBLIC_API_URL}${product.productImage}` : ''}
                           sx={{ 
                             width: 56, 
                             height: 56, 

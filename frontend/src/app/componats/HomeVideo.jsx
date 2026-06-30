@@ -42,7 +42,7 @@ function HomeVideo() {
   const fetchVideos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/videos/get');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/videos/get`);
       const sortedVideos = response.data.videos?.sort((a, b) => a.order - b.order) || [];
       setVideos(sortedVideos);
     } catch (error) {

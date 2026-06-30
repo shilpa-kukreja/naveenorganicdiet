@@ -39,7 +39,7 @@ export default function Dashboard() {
 
         const fetchUser = async () => {
             try {
-                const res = await fetch("http://localhost:5000/api/users/getuser", {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuser`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -73,7 +73,7 @@ export default function Dashboard() {
     const fetchUserOrders = async (userId) => {
         setIsOrdersLoading(true);
         try {
-            const { data } = await axios.post("http://localhost:5000/api/order/user", { userId });
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/order/user`, { userId });
             setOrders(data.orders || []);
         } catch (error) {
             console.error("Error fetching orders:", error);
@@ -103,7 +103,7 @@ export default function Dashboard() {
         formData.append("image", file);
 
         try {
-            const res = await fetch("http://localhost:5000/api/users/updateuser", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/updateuser`, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ export default function Dashboard() {
         const token = localStorage.getItem("token");
         
         try {
-            const res = await fetch("http://localhost:5000/api/users/updateuser", {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/updateuser`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -175,7 +175,7 @@ export default function Dashboard() {
     const changeOrderStatus = async (orderid, status) => {
         setUpdatingOrder(orderid);
         try {
-            const { data } = await axios.put("http://localhost:5000/api/order/status", { orderid, status });
+            const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/order/status`, { orderid, status });
             showNotification(data.message || "Order status updated successfully");
             // Refresh orders
             if (user) {
@@ -274,7 +274,7 @@ export default function Dashboard() {
                             <div className="mr-4">
                                 {user?.img ? (
                                     <img
-                                        src={`http://localhost:5000${user.img}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}${user.img}`}
                                         alt="Profile"
                                         className="w-16 h-16 rounded-full object-cover border-4 border-white/30 shadow-md"
                                     />
@@ -365,7 +365,7 @@ export default function Dashboard() {
                                         <div className="flex flex-col items-center">
                                             {user?.img ? (
                                                 <img
-                                                    src={`http://localhost:5000${user.img}`}
+                                                    src={`${process.env.NEXT_PUBLIC_API_URL}${user.img}`}
                                                     alt="Profile"
                                                     className="w-40 h-40 rounded-full object-cover border-4 border-gray-100 shadow-md mb-4"
                                                 />

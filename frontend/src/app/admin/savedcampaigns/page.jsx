@@ -62,7 +62,7 @@ const SavedCampaigns = () => {
       setLoading(true);
       
       const { data } = await axios.get(
-        "http://localhost:5000/api/email-campaign/campaigns"
+        `${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/campaigns`
       );
 
       if (data.success) {
@@ -143,7 +143,7 @@ const SavedCampaigns = () => {
       }
 
       // Send the campaign
-      const { data } = await axios.post("http://localhost:5000/api/email-campaign/send-bulk", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/send-bulk`, {
         campaignId: campaign._id,
         customSubject: campaign.subject,
         customContent: campaign.content,
@@ -181,7 +181,7 @@ const SavedCampaigns = () => {
       }
 
       // Send to all users
-      const { data } = await axios.post("http://localhost:5000/api/email-campaign/send-bulk", {
+      const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/send-bulk`, {
         campaignId: campaign._id,
         customSubject: campaign.subject,
         customContent: campaign.content,
@@ -211,7 +211,7 @@ const SavedCampaigns = () => {
 
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/email-campaign/campaigns/${campaignId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/campaigns/${campaignId}`
       );
 
       if (data.success) {
@@ -228,7 +228,7 @@ const SavedCampaigns = () => {
   const duplicateCampaign = async (campaignId) => {
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/email-campaign/campaigns/${campaignId}/duplicate`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/campaigns/${campaignId}/duplicate`
       );
 
       if (data.success) {

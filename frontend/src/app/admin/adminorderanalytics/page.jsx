@@ -64,7 +64,7 @@ const AdminOrderAnalytics = () => {
   const fetchAnalytics = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/api/order/analytics/all");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/analytics/all`);
       setAnalytics(data);
     } catch (error) {
       toast.error("Failed to fetch analytics data");
@@ -1058,7 +1058,7 @@ const UserDetailModal = ({ userId, onClose }) => {
   useEffect(() => {
     const fetchUserAnalytics = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/order/analytics/user/${userId}`);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/analytics/user/${userId}`);
         setUserAnalytics(data.analytics);
       } catch (error) {
         toast.error("Failed to fetch user details");

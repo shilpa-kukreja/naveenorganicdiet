@@ -180,7 +180,7 @@ const EmailCampaign = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get("http://localhost:5000/api/users/getalluser");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getalluser`);
       setUsers(data.users || []);
 
       // Update stats
@@ -209,7 +209,7 @@ const EmailCampaign = () => {
 
   const fetchTemplates = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/email-campaign/templates");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/templates`);
       setTemplates(data.templates || []);
     } catch (error) {
       console.error("Failed to fetch templates:", error);
@@ -224,7 +224,7 @@ const EmailCampaign = () => {
 
   const fetchCampaignStats = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/email-campaign/stats");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/stats`);
       setCampaignStats(data.stats);
     } catch (error) {
       console.error("Failed to fetch campaign stats");
@@ -353,7 +353,7 @@ const EmailCampaign = () => {
 
         // Save to database
         const { data: response } = await axios.post(
-          "http://localhost:5000/api/email-campaign/campaigns",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/campaigns`,
           campaignData
         );
 
@@ -422,7 +422,7 @@ const EmailCampaign = () => {
       emailEditorRef.current?.editor?.exportHtml(async (data) => {
         const { html } = data;
 
-        const { data: response } = await axios.post("http://localhost:5000/api/email-campaign/send-test", {
+        const { data: response } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/send-test`, {
           templateId: campaign.template !== "custom" ? campaign.template : null,
           customSubject: campaign.subject,
           customContent: html
@@ -462,7 +462,7 @@ const EmailCampaign = () => {
       emailEditorRef.current?.editor?.exportHtml(async (data) => {
         const { html } = data;
 
-        const { data: response } = await axios.post("http://localhost:5000/api/email-campaign/send-bulk", {
+        const { data: response } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/email-campaign/send-bulk`, {
           templateId: campaign.template !== "custom" ? campaign.template : null,
           customSubject: campaign.subject,
           customContent: html,

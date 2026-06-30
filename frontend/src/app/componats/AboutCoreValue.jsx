@@ -117,7 +117,7 @@ function AboutCoreValue() {
   const fetchCoreValues = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/about-core-values/active');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/about-core-values/active`);
       if (response.data.success) {
         setCoreValues(response.data.coreValues || []);
       }

@@ -28,7 +28,7 @@ import {
 } from 'lucide-react';
 // import { format } from 'date-fns';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/reviews';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/reviews`;
 
 const ReviewAdmin = () => {
   const [reviews, setReviews] = useState([]);
@@ -548,7 +548,7 @@ const formatDate = (dateValue) => {
                             <div className="flex-shrink-0 h-12 w-12 mr-4">
                               <img
                                 className="h-12 w-12 rounded-lg object-cover border border-gray-200"
-                                src={`http://localhost:5000${review.product?.thumbImg }`}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}${review.product?.thumbImg }`}
                                 alt={review.product?.name || 'Product'}
                                 // onError={(e) => {
                                 //   e.target.src = '/placeholder-product.jpg';
@@ -725,7 +725,7 @@ const formatDate = (dateValue) => {
                                 <div className="bg-white p-4 rounded-lg border border-gray-200">
                                   <div className="flex items-center mb-4">
                                     <img
-                                      src={`http://localhost:5000${review.product?.thumbImg || '/placeholder-product.jpg'}`}
+                                      src={`${process.env.NEXT_PUBLIC_API_URL}${review.product?.thumbImg || '/placeholder-product.jpg'}`}
                                       alt={review.product?.name}
                                       className="w-16 h-16 object-cover rounded border border-gray-300 mr-4"
                                     />

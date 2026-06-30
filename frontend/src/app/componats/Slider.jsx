@@ -190,7 +190,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/mainbanner';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/mainbanner`;
 
 function Slider() {
   const [banners, setBanners] = useState([]);
@@ -207,7 +207,7 @@ function Slider() {
   const fetchBanners = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/all`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/mainbanner/all`);
       // Filter only active banners
       const activeBanners = response.data.banners
         .filter(banner => banner.status)

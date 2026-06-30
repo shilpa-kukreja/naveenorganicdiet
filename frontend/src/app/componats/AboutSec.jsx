@@ -15,7 +15,7 @@ function AboutSec() {
   const fetchAboutSection = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/about/active');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/about/active`);
       if (response.data.success) {
         setSection(response.data.section);
       }
@@ -99,7 +99,7 @@ function AboutSec() {
           </div>
           <div className='lg:basis-2/3'>
             <img 
-              src={`http://localhost:5000${section.image}`} 
+              src={`${process.env.NEXT_PUBLIC_API_URL}${section.image}`} 
               className='w-full rounded-xl border border-gray-300 shadow-lg' 
               alt={section.title} 
             />

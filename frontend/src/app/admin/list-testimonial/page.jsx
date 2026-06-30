@@ -37,7 +37,7 @@ const TestimonialsList = () => {
   const fetchTestimonials = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/testimonials/all");
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/all`);
       if (res.data.success) {
         setTestimonials(res.data.testimonials);
         setFilteredTestimonials(res.data.testimonials);
@@ -80,7 +80,7 @@ const TestimonialsList = () => {
     if (!window.confirm("Are you sure you want to delete this testimonial?")) return;
 
     try {
-      const res = await axios.delete(`http://localhost:5000/api/testimonials/delete/${id}`);
+      const res = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/delete/${id}`);
 
       console.log("response: ", res.data);
 
@@ -114,7 +114,7 @@ const TestimonialsList = () => {
 
     try {
       const deletePromises = selectedItems.map(id =>
-        axios.delete(`http://localhost:5000/api/testimonials/delete/${id}`)
+        axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/delete/${id}`)
       );
       
       await Promise.all(deletePromises);

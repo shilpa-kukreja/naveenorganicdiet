@@ -35,7 +35,7 @@ function ContactSec() {
       message: formData.message
     }
     try {
-      const response = await fetch('http://localhost:5000/api/contact/contact', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/additionalbanner';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/additionalbanner`;
 
 const AdditionalBanner = () => {
   const [banners, setBanners] = useState([]);
@@ -185,7 +185,7 @@ const AdditionalBanner = () => {
   const openEditModal = (banner) => {
     setSelectedBanner(banner);
     // FIXED: Correct image URL construction
-    setImagePreview(`http://localhost:5000${banner.image}`);
+    setImagePreview(`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`);
     setOpenModal(true);
   };
 
@@ -296,7 +296,7 @@ const AdditionalBanner = () => {
                           <div className="h-20 w-32 flex-shrink-0">
                             <img
                               className="h-20 w-32 rounded-lg object-cover border border-gray-200"
-                              src={`http://localhost:5000${banner.image}`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`}
                               alt="Banner"
                             />
                           </div>
@@ -545,7 +545,7 @@ const AdditionalBanner = () => {
                 <div className="bg-gray-50 p-4 rounded-lg mb-6">
                   <div className="flex items-center space-x-4">
                     <img
-                      src={`http://localhost:5000${selectedBanner.image}`}
+                      src={`${process.env.NEXT_PUBLIC_API_URL}${selectedBanner.image}`}
                       alt="Banner to delete"
                       className="w-16 h-12 object-cover rounded"
                     />

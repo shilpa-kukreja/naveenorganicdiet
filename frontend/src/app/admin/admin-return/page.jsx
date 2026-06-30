@@ -788,7 +788,7 @@ const AdminReturns = () => {
   const fetchAllReturns = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/api/returns/all-returns");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/returns/all-returns`);
       if (data.success) {
         setReturns(data.returnRequests || []);
       }
@@ -806,7 +806,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'approve', id: returnId });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/returns/approve-return",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/approve-return`,
         { returnId }
       );
 
@@ -831,7 +831,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'reject', id: selectedReturnId });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/returns/reject",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/reject`,
         {
           returnId: selectedReturnId,
           rejectionReason
@@ -860,7 +860,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'shipmozo', id: returnId });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/returns/push-to-shipmozo",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/push-to-shipmozo`,
         { returnId }
       );
 
@@ -902,7 +902,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'confirm', id: returnId });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/returns/confirm-received",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/confirm-received`,
         { returnId }
       );
 
@@ -928,7 +928,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'refund', id: returnId });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/returns/process-refund",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/process-refund`,
         { returnId }
       );
 
@@ -965,7 +965,7 @@ const AdminReturns = () => {
       setProcessingAction({ type: 'track', id: returnId });
 
       const { data } = await axios.get(
-        `http://localhost:5000/api/returns/tracking/${returnId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/returns/tracking/${returnId}`
       );
 
       if (data.success) {

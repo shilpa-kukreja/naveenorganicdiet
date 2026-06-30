@@ -173,7 +173,7 @@ const RecentlyViewed = ({ product }) => {
                       {imageState !== 'error' ? (
                        
                           <img
-                            src={`http://localhost:5000${product.thumbImg}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                             className={`w-full object-cover aspect-square cursor-pointer transition-all duration-500 ${imageState === true ? 'opacity-100' : 'opacity-0'
                               } group-hover:scale-110`}
                             alt={product.name}

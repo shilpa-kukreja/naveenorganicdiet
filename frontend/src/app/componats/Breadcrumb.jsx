@@ -28,7 +28,7 @@ function Breadcrumb({ pageType = 'about' }) {
   const fetchBanner = async (type) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/about-banner/page/${type}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/about-banner/page/${type}`);
       if (response.data.success) {
         setBanner(response.data.banner);
       } else {
@@ -108,7 +108,7 @@ function Breadcrumb({ pageType = 'about' }) {
   return (
     <div className="relative">
       <img 
-        src={`http://localhost:5000${banner.image}`} 
+        src={`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`} 
         className='w-full h-full object-cover' 
         alt={banner.title} 
       />

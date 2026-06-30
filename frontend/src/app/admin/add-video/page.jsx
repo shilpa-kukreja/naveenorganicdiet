@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/videos';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || `${process.env.NEXT_PUBLIC_API_URL}/api/videos`;
 
 const VideoAdmin = () => {
   const [videos, setVideos] = useState([]);
@@ -173,7 +173,7 @@ const VideoAdmin = () => {
       description: video.description || '',
       order: video.order
     });
-    setVideoPreview(`http://localhost:5000${video.video}`);
+    setVideoPreview(`${process.env.NEXT_PUBLIC_API_URL}${video.video}`);
     setOpenModal(true);
   };
 
@@ -289,7 +289,7 @@ const VideoAdmin = () => {
                           <div className="h-20 w-32 flex-shrink-0 relative">
                             <video
                               className="h-20 w-32 rounded-lg object-cover border border-gray-200"
-                              src={`http://localhost:5000${video.video}`}
+                              src={`${process.env.NEXT_PUBLIC_API_URL}${video.video}`}
                               muted
                               preload="metadata"
                             />
@@ -608,7 +608,7 @@ const VideoAdmin = () => {
                   <div className="flex items-center space-x-4">
                     <div className="relative w-24 h-16">
                       <video
-                        src={`http://localhost:5000${selectedVideo.video}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}${selectedVideo.video}`}
                         className="w-full h-full object-cover rounded"
                         muted
                         preload="metadata"

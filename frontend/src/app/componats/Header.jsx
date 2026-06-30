@@ -2305,7 +2305,7 @@ function Header() {
         setIsLoggedIn(!!token);
 
         if (token) {
-            fetch("http://localhost:5000/api/users/getuser", {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/getuser`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => res.json())
@@ -2939,7 +2939,7 @@ function Header() {
                                             >
                                                 <div className="flex-shrink-0">
                                                     <img
-                                                        src={`http://localhost:5000${product.thumbImg}`}
+                                                        src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                                                         alt={product.name}
                                                         className="w-16 h-16 object-cover rounded-lg"
                                                         onError={(e) => {
@@ -3061,7 +3061,7 @@ function Header() {
                                             className="flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer transition-colors"
                                         >
                                             <img
-                                                src={`http://localhost:5000${product.thumbImg}`}
+                                                src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                                                 alt={product.name}
                                                 className="w-12 h-12 object-cover rounded-md"
                                                 onError={(e) => {
@@ -3459,7 +3459,7 @@ const WishlistDrawer = ({ onClose }) => {
                             >
                                 <div className="flex-shrink-0">
                                     <img
-                                        src={`http://localhost:5000${product.thumbImg}`}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                                         alt={product.name}
                                         className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-lg"
                                         onError={(e) => {

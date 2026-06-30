@@ -18,7 +18,7 @@ const Testimonial = () => {
 useEffect(() => {
   const fetchTestimonials = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/testimonials/all");
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/testimonials/all`);
       const data = await res.json();
       console.log("Fetched testimonials:", data);
 

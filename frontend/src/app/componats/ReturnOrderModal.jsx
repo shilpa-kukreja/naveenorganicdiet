@@ -460,7 +460,7 @@ const ReturnOrderModal = ({ isOpen, onClose, orderId, onReturnRequested }) => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://localhost:5000/api/order/single-order/${orderId}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/order/single-order/${orderId}`,
         {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -613,7 +613,7 @@ const ReturnOrderModal = ({ isOpen, onClose, orderId, onReturnRequested }) => {
       }
 
       const response = await axios.post(
-        'http://localhost:5000/api/order/request-return',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/order/request-return`,
         payload,
         {
           headers: {

@@ -401,7 +401,7 @@ useEffect(() => {
     if (guestCart.length > 0) {
       try {
         await axios.post(
-          "http://localhost:5000/api/cart/merge",
+          `${process.env.NEXT_PUBLIC_API_URL}/api/cart/merge`,
           { items: guestCart },
           {
             headers: {
@@ -475,7 +475,7 @@ useEffect(() => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/category/get");
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/category/get`);
 
       // CORRECTED: Use res.data directly since backend returns array
       // console.log("API Response:", res.data); // This should show your categories array
@@ -498,7 +498,7 @@ useEffect(() => {
   const fetchProducts = async () => {
     try {
       setIsLoading(true);
-      const res = await axios.get("http://localhost:5000/api/product/products");
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/product/products`);
       if (res.data?.products) {
         setProducts(res.data.products);
       }
@@ -523,7 +523,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/blog/blogs");
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/blog/blogs`);
 
         if (response.data && Array.isArray(response.data)) {
           setBlogs(response.data);

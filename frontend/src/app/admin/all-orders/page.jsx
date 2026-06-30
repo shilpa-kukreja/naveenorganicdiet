@@ -65,7 +65,7 @@ const AdminOrders = () => {
   const fetchAllOrders = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/api/order/all");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/all`);
       setOrders(data.orders);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to fetch orders");
@@ -93,13 +93,13 @@ const AdminOrders = () => {
   const changeStatus = async (orderid, status) => {
   setUpdatingOrder(orderid);
   try {
-    const { data } = await axios.put("http://localhost:5000/api/order/status", { orderid, status });
+    const { data } = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/order/status`, { orderid, status });
     toast.success(data.message);
     
     // ✅ If status is "Delivered", also update COD payment status
     if (status === "Delivered") {
       try {
-        const codResponse = await axios.post("http://localhost:5000/api/order/cod-payment-status", { 
+        const codResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/order/cod-payment-status`, { 
           orderid, 
           status: "delivered" // Send lowercase for backend consistency
         });

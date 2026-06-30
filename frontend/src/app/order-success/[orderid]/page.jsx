@@ -23,7 +23,7 @@ export default function OrderSuccessPage() {
     const token = localStorage.getItem("token");
     if (orderid) {
       axios
-        .get(`http://localhost:5000/api/order/single-order/${orderid}`,
+        .get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/single-order/${orderid}`,
            {
           headers: {
             'Authorization': `Bearer ${token}`

@@ -13,7 +13,7 @@ function RoundedPromotionalBanner() {
   const fetchActiveBanner = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/additionalbanner/getall');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/additionalbanner/getall`);
       const activeBanners = response.data.additionalbanners?.filter(b => b.status) || [];
       if (activeBanners.length > 0) {
         // Get the first active banner
@@ -44,7 +44,7 @@ function RoundedPromotionalBanner() {
     <div className="py-12 bg-gray-50 mx-auto max-w-8xl  px-4 sm:px-6 lg:px-16">
       <div className="container mx-auto">
         <img 
-          src={`http://localhost:5000${banner.image}`} 
+          src={`${process.env.NEXT_PUBLIC_API_URL}${banner.image}`} 
           className="rounded-md border-gray-400 shadow-md w-full h-auto"  
           alt="Promotional Banner" 
         />

@@ -35,7 +35,7 @@ export default function PayoutDashboard () {
   const fetchPayouts = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("http://localhost:5000/api/users/admin/all", 
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/admin/all`, 
       );
       console.log("Raw payout data:", res.data.payouts);
       // Process payouts to ensure we have user data
@@ -59,7 +59,7 @@ export default function PayoutDashboard () {
   const updateStatus = async (id, status) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/users/admin/update/${id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/users/admin/update/${id}`,
         { status },
       );
       toast.success(`Payout ${status.toLowerCase()} successfully`);

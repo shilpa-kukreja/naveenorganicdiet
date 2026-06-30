@@ -273,7 +273,7 @@ const ProductCard = ({
           <div className={`w-full aspect-square bg-gray-100 ${!imageState ? 'animate-pulse' : ''}`}>
             {imageState !== 'error' ? (
               <img
-                src={`http://localhost:5000${product.thumbImg}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                 className={`w-full h-full object-cover transition-all duration-500 ${
                   imageState === true ? 'opacity-100' : 'opacity-0'
                 } group-hover:scale-110`}

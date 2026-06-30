@@ -44,7 +44,7 @@ export default function AdminContacts() {
       setLoading(true);
       console.log("Fetching contacts from API...");
       
-      const response = await axios.get("http://localhost:5000/api/contact/contact");
+      const response = await axios.get(`${process.env}/api/contact/contact`);
       console.log("API Response:", response);
       console.log("Response data:", response.data);
       
@@ -81,7 +81,7 @@ export default function AdminContacts() {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this contact message?")) {
       try {
-        await axios.delete(`http://localhost:5000/api/contact/contact/${id}`);
+        await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/contact/contact/${id}`);
         toast.success("Contact message deleted successfully");
         fetchContacts();
       } catch (error) {

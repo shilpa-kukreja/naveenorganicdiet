@@ -27,7 +27,7 @@ const AbandonedCartsDashboard = () => {
             setError('');
 
             const response = await axios.get(
-                'http://localhost:5000/api/abandoned-carts',
+                `${process.env.NEXT_PUBLIC_API_URL}/api/abandoned-carts`,
                 {
                     params: {
                         page,
@@ -57,7 +57,7 @@ const AbandonedCartsDashboard = () => {
     const fetchStats = async () => {
         try {
             const response = await axios.get(
-                'http://localhost:5000/api/abandoned-carts/stats'
+                `${process.env.NEXT_PUBLIC_API_URL}/api/abandoned-carts/stats`
             );
             setStats(response.data.stats);
         } catch (err) {
@@ -70,7 +70,7 @@ const AbandonedCartsDashboard = () => {
         try {
             setLoading(true);
             const response = await axios.post(
-                'http://localhost:5000/api/admin/abandoned-carts/test/create-dummy'
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/abandoned-carts/test/create-dummy`
             );
             alert(response.data.message);
             fetchCarts();
@@ -85,7 +85,7 @@ const AbandonedCartsDashboard = () => {
     const sendReminder = async (cartId) => {
         try {
             await axios.post(
-                `http://localhost:5000/api/admin/abandoned-carts/${cartId}/remind`
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/abandoned-carts/${cartId}/remind`
             );
             alert('Reminder sent successfully!');
             fetchCarts();
@@ -98,7 +98,7 @@ const AbandonedCartsDashboard = () => {
     const markRestored = async (cartId) => {
         try {
             await axios.put(
-                `http://localhost:5000/api/admin/abandoned-carts/${cartId}/restore`
+                `${process.env.NEXT_PUBLIC_API_URL}/api/admin/abandoned-carts/${cartId}/restore`
             );
             alert('Cart marked as restored!');
             fetchCarts();
@@ -113,7 +113,7 @@ const AbandonedCartsDashboard = () => {
         if (window.confirm('Are you sure you want to delete this cart?')) {
             try {
                 await axios.delete(
-                    `http://localhost:5000/api/admin/abandoned-carts/${cartId}`
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/admin/abandoned-carts/${cartId}`
                 );
                 alert('Cart deleted!');
                 fetchCarts();
@@ -338,7 +338,7 @@ const AbandonedCartsDashboard = () => {
                                                     <div className="flex gap-4">
                                                         {item.productDetails?.thumbImg && (
                                                             <img
-                                                                src={`http://localhost:5000${item.productDetails.thumbImg}`}
+                                                                src={`http://localhost:5000/${item.productDetails.thumbImg}`}
                                                                 alt={item.productDetails.name}
                                                                 className="w-20 h-20 object-cover rounded"
                                                             />

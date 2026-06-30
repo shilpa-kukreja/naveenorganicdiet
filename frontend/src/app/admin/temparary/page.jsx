@@ -10,12 +10,12 @@ const TestAPIButton = ({ campaignId }) => {
       console.log("Testing API connection...");
 
       const debugRes = await axios.get(
-        `http://localhost:5000/api/tracking/debug/${campaignId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tracking/debug/${campaignId}`
       );
       console.log("Debug API response:", debugRes.data);
 
       const analyticsRes = await axios.get(
-        `http://localhost:5000/api/tracking/analytics/${campaignId}`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tracking/analytics/${campaignId}`
       );
       console.log("Analytics API response:", analyticsRes.data);
 

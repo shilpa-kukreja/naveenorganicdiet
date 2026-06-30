@@ -53,7 +53,7 @@ const UserReturns = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:5000/api/returns/my-returns", {
+      const { data } = await axios.get("${process.env.NEXT_PUBLIC_API_URL}/api/returns/my-returns", {
         headers: {
           'Authorization': `Bearer ${token}`
         }

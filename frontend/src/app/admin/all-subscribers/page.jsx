@@ -37,7 +37,7 @@ const SubscriptionManagement = () => {
   const fetchSubscribers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/subscriber/subscribers");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriber/subscribers`);
       setSubscribers(response.data);
     } catch (error) {
       console.error("Failed to fetch subscribers", error);
@@ -51,7 +51,7 @@ const SubscriptionManagement = () => {
   const handleUnsubscribe = async (email) => {
     try {
       setActionLoading(true);
-      await axios.delete(`http://localhost:5000/api/subscriber/subscribers/${email}`);
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriber/subscribers/${email}`);
       toast.success("Subscriber removed successfully");
 
       setSubscribers((prev) => prev.filter((sub) => sub.email !== email));
@@ -76,7 +76,7 @@ const SubscriptionManagement = () => {
 
       await Promise.all(
         selectedSubscribers.map((email) =>
-          axios.delete(`http://localhost:5000/api/subscriber/subscribers/${email}`)
+          axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/subscriber/subscribers/${email}`)
         )
       );
 

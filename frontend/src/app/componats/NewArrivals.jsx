@@ -184,7 +184,7 @@ const NewArrivals = () => {
                       <div className={`w-full h-48 sm:h-56 md:h-64 bg-gray-100 ${!imageState ? 'animate-pulse' : ''}`}>
                         {imageState !== 'error' ? (
                           <img
-                            src={`http://localhost:5000${product.thumbImg}`}
+                            src={`${process.env.NEXT_PUBLIC_API_URL}${product.thumbImg}`}
                             className={`w-full h-full object-cover cursor-pointer transition-all duration-500 ${
                               imageState === true ? 'opacity-100' : 'opacity-0'
                             } group-hover:scale-110`}

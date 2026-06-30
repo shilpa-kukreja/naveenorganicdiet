@@ -643,8 +643,8 @@ const LoginContent = () => {
     
     try {
       const endpoint = loginMethod === 'whatsapp' 
-        ? 'http://localhost:5000/api/users/whatsapp-loginotp'
-        : 'http://localhost:5000/api/users/loginotp';
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/users/whatsapp-loginotp`
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/users/loginotp`;
 
       console.log(`Sending ${loginMethod} OTP to: ${formData.mobile}`);
       
@@ -690,8 +690,8 @@ const LoginContent = () => {
     setError('');
     try {
       const endpoint = loginMethod === 'whatsapp' 
-        ? 'http://localhost:5000/api/users/whatsapp-loginotp'
-        : 'http://localhost:5000/api/users/loginotp';
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/users/whatsapp-loginotp`
+        : `${process.env.NEXT_PUBLIC_API_URL}/api/users/loginotp`;
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -735,7 +735,7 @@ const LoginContent = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await fetch('http://localhost:5000/api/users/verify-otp', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/verify-otp`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

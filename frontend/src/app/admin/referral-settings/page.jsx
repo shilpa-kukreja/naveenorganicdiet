@@ -236,7 +236,7 @@ export default function ReferralSettings() {
   const fetchSettings = async () => {
     try {
       setFetchLoading(true);
-      const { data } = await axios.get("http://localhost:5000/api/users/referral-config");
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users/referral-config`);
       if (data.success && data.config) {
         setSettings(data.config);
       }
@@ -252,7 +252,7 @@ export default function ReferralSettings() {
     setLoading(true);
     setMessage("");
     try {
-      const response = await axios.put("http://localhost:5000/api/users/referral-config", settings);
+      const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/users/referral-config`, settings);
       
       if (response.data.success) {
         setMessage("Settings Updated Successfully ✅");
